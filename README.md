@@ -3,7 +3,7 @@
 viafr <img src="man/figures/logo.png" align="right" width="120" />
 ==================================================================
 
-[![Build status](https://travis-ci.org/stefanieschneider/viafr.svg?branch=master)](https://travis-ci.org/stefanieschneider/viafr) <!-- [![Coverage status](http://codecov.io/github/stefanieschneider/viafr/coverage.svg?branch=master)](http://codecov.io/github/stefanieschneider/viafr?branch=master) --> <!-- [![CRAN badge](http://www.r-pkg.org/badges/version/viafr)](https://cran.r-project.org/package=viafr) --> [![CRAN checks](https://cranchecks.info/badges/worst/viafr)](https://cran.r-project.org/web/checks/check_results_viafr.html)
+[![Build status](https://travis-ci.org/stefanieschneider/viafr.svg?branch=master)](https://travis-ci.org/stefanieschneider/viafr) [![Coverage status](http://codecov.io/github/stefanieschneider/viafr/coverage.svg?branch=master)](http://codecov.io/github/stefanieschneider/viafr?branch=master) <!-- [![CRAN badge](http://www.r-pkg.org/badges/version/viafr)](https://cran.r-project.org/package=viafr) --> [![CRAN checks](https://cranchecks.info/badges/worst/viafr)](https://cran.r-project.org/web/checks/check_results_viafr.html)
 
 Overview
 --------
