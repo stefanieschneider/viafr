@@ -32,12 +32,11 @@ viaf_suggest <- function(query = NULL, ...) {
   return(items)
 }
 
-#' @importFrom dplyr rename select mutate left_join
-#' @importFrom tibble as_tibble enframe
 #' @importFrom tidyr unnest drop_na
 #' @importFrom purrr transpose map
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang .data
+#' @import dplyr tibble
 get_suggest <- function(x) {
   if (is.null(x$result)) {
     return(
@@ -74,5 +73,5 @@ get_suggest <- function(x) {
       .data$name_type, .data$text, .data$score
     )
 
-  return(normalize(metadata))
+  return(normalize(ungroup(metadata)))
 }

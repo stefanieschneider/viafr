@@ -75,9 +75,7 @@ get_source_ids <- function(x) {
   result <- tibble::as_tibble(x) %>%
     rename(id = "@nsid", scheme = "#text") %>%
     mutate(
-      id = map_chr(
-        .data$id, ~ stringr::str_remove_all(., "^\\.|.*/")
-      ),
+      id = stringr::str_remove_all(.data$id, "^\\.|.*/"),
       scheme = map_chr(
         .data$scheme, ~ strsplit(., "\\|") %>% pluck(1, 1)
       )
@@ -87,15 +85,17 @@ get_source_ids <- function(x) {
   return(result)
 }
 
-#' @importFrom dplyr mutate left_join pull
+#' @importFrom tibble tibble as_tibble
+#' @importFrom dplyr mutate left_join
 #' @importFrom rlang .data
 get_name_type <- function(x) {
   if (length(unlist(x)) == 1) {
-    x <- tibble::tibble(name_type = x)
+    x <- tibble(name_type = x)
   }
 
-  result <- mutate(
-      x, name_type = tolower(.data$name_type) %>%
+  result <- as_tibble(x) %>%
+    mutate(
+      name_type = tolower(.data$name_type) %>%
         stringr::str_remove_all("\\s")
     ) %>%
     left_join(
@@ -108,7 +108,9 @@ get_name_type <- function(x) {
 
 #' @importFrom stringr str_subset
 find_field <- function(x, name, exclude = NULL) {
-  x <- unlist(x); names(x) <- paste0(".", names(x))
+  x <- unlist(x) # entirely flatten list of lists
+
+  names(x) <- paste0(seq_along(x), ".", names(x))
   field <- str_subset(names(x), paste0(".*\\.", name))
 
   if (!is.null(exclude)) {
@@ -123,12 +125,12 @@ find_field <- function(x, name, exclude = NULL) {
   return(unlist(field, recursive = FALSE))
 }
 
-#' @importFrom dplyr group_by ungroup summarise one_of
-#' @importFrom stringr str_subset str_detect
 #' @importFrom magrittr "%>%"
+#' @importFrom tidyr spread
 #' @importFrom rlang .data
+#' @import dplyr stringr
 get_text <- function(x) {
-  x <- find_field(x, name = "subfield", "x500")
+  x <- find_field(x, name = "subfield", exclude = "x500")
 
   result <- tibble::tibble(
       code = str_subset(names(x), "@code.*$"),
@@ -138,12 +140,20 @@ get_text <- function(x) {
       id = cumsum(str_detect(.data$code, "code(?:1)?$")),
       code = x[.data$code], text = x[.data$text]
     ) %>%
-    group_by(.data$id, .data$code) %>%
-    summarise(
-      text = paste(.data$text, collapse = ", ")
+    mutate(
+      text = case_when(
+        str_detect(code, "^[0-9]") ~ text,
+        !is.na(code) ~ str_remove_all(
+          text, "^[.,:()]|[,:()]$|(?<=\\W)\\.$"
+        )
+      )
     ) %>%
-    ungroup() %>% normalize() %>% group_by(.data$id) %>%
-    tidyr::spread(.data$code, .data$text)
+    distinct() %>% group_by(.data$id, .data$code) %>%
+    summarise(text = paste(.data$text, collapse = ", ")) %>%
+    group_by(.data$id) %>% spread(.data$code, .data$text) %>%
+    ungroup() %>% select(-id) %>% group_by_all() %>%
+    add_tally(sort = TRUE, name = "count") %>% distinct() %>%
+    mutate(id = row_number()) %>% select(id, count, everything())
 
   # reorder columns first by letter, then by number
   id <- str_detect(colnames(result), "^[0-9]")
@@ -152,5 +162,5 @@ get_text <- function(x) {
     c(colnames(result)[!id], colnames(result)[id])
   ))
 
-  return(result)
+  return(normalize(ungroup(result)))
 }

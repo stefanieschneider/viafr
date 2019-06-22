@@ -11,6 +11,8 @@ knitr::opts_chunk$set(
 	fig.path = "man/figures/README-",
 	out.width = "100%"
 )
+
+options(width = "100")
 ```
 
 # viafr <img src="man/figures/logo.png" align="right" width="120" />
@@ -43,26 +45,35 @@ devtools::install_github("stefanieschneider/viafr")
 
 The viafr package functions use the VIAF (Virtual International Authority File) API. Optional VIAF API query parameters can be passed into each function. For information on supported query parameters, please see https://www.oclc.org/developer/develop/web-services/viaf/authority-cluster.en.html.
 
-`viaf_get()` returns a tibble, where each row contains information about the respective VIAF identifier, whereas `viaf_search()` and `viaf_suggest()` each produce a named list of tibbles, with each tibble containing information about the respective search query. The MARC 21 field definitions are used.
+`viaf_get()` returns a tibble, where each row contains information about the respective VIAF identifier, whereas `viaf_search()` and `viaf_suggest()` each produce a named list of tibbles, with each tibble containing information about the respective search query. The MARC 21 field definitions are used, see, e.g., https://www.loc.gov/marc/bibliographic/.
 
-```{r example}
+```{r example, message=FALSE, warning=FALSE}
 library(viafr)
+
+library(dplyr)
+library(purrr)
 
 (result <- viaf_get("15873"))
 
-result$source_ids[1]
+pull(result, source_ids) %>% pluck(1)
 
-result$text[1]
+pull(result, text) %>% pluck(1)
+
+# aggregate name variants and show dominant ones
+pull(result, text) %>% pluck(1) %>% select(count, a) %>%
+  group_by(a) %>% summarise(count = sum(count)) %>%
+  arrange(-count) %>% filter(count > 9)
 
 (result <- viaf_search("Menzel", maximumRecords = 5))
 
-result$`Menzel`$source_ids
+pull(result$`Menzel`, source_ids)
 
-result$`Menzel`$text
+pull(result$`Menzel`, text) %>% pluck(2)
 
 (result <- viaf_suggest("austen"))
 
-result$`austen`$source_ids
+filter(result$`austen`, score > 10000) %>%
+  pull(source_ids) %>% pluck(1)
 ```
 
 <!-- ## Citation -->
