@@ -3,8 +3,10 @@
 
 # viafr <img src="man/figures/logo.png" align="right" width="120" />
 
-[![Build
+[![Travis CI Build
 status](https://travis-ci.org/stefanieschneider/viafr.svg?branch=master)](https://travis-ci.org/stefanieschneider/viafr)
+[![AppVeyor Build
+Status](https://ci.appveyor.com/api/projects/status/github/stefanieschneider/viafr?branch=master&svg=true)](https://ci.appveyor.com/project/stefanieschneider/viafr)
 [![Coverage
 status](http://codecov.io/github/stefanieschneider/viafr/coverage.svg?branch=master)](http://codecov.io/github/stefanieschneider/viafr?branch=master)
 
