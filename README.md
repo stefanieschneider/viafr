@@ -1,35 +1,47 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-viafr <img src="man/figures/logo.png" align="right" width="120" />
-==================================================================
 
-[![Build status](https://travis-ci.org/stefanieschneider/viafr.svg?branch=master)](https://travis-ci.org/stefanieschneider/viafr) [![Coverage status](http://codecov.io/github/stefanieschneider/viafr/coverage.svg?branch=master)](http://codecov.io/github/stefanieschneider/viafr?branch=master) <!-- [![CRAN badge](http://www.r-pkg.org/badges/version/viafr)](https://cran.r-project.org/package=viafr) --> [![CRAN checks](https://cranchecks.info/badges/worst/viafr)](https://cran.r-project.org/web/checks/check_results_viafr.html)
+# viafr <img src="man/figures/logo.png" align="right" width="120" />
 
-Overview
---------
+[![Build
+status](https://travis-ci.org/stefanieschneider/viafr.svg?branch=master)](https://travis-ci.org/stefanieschneider/viafr)
+[![Coverage
+status](http://codecov.io/github/stefanieschneider/viafr/coverage.svg?branch=master)](http://codecov.io/github/stefanieschneider/viafr?branch=master)
 
-This R package uses the VIAF (Virtual International Authority File) API. VIAF is an OCLC service that combines multiple LAM (Library, Archive, and Museum) name authority files into a single name authority service. It thus provides direct access to linked names for the same entity across the world's major name authority files, including national and regional variations in language, character set, and spelling. For more information go to <http://viaf.org/>.
+## Overview
 
-Installation
-------------
+This R package uses the VIAF (Virtual International Authority File) API.
+VIAF is an OCLC service that combines multiple LAM (Library, Archive,
+and Museum) name authority files into a single name authority service.
+It thus provides direct access to linked names for the same entity
+across the world’s major name authority files, including national and
+regional variations in language, character set, and spelling. For more
+information go to <http://viaf.org/>.
 
-<!-- You can install the released version of viafr from [CRAN](https://CRAN.R-project.org) with: -->
-<!-- ``` r -->
-<!-- install.packages("viafr") -->
-<!-- ``` -->
-To install the development version from [GitHub](https://github.com/stefanieschneider/viafr) use:
+## Installation
+
+To install the development version from
+[GitHub](https://github.com/stefanieschneider/viafr) use:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("stefanieschneider/viafr")
 ```
 
-Usage
------
+## Usage
 
-The viafr package functions use the VIAF (Virtual International Authority File) API. Optional VIAF API query parameters can be passed into each function. For information on supported query parameters, please see <https://www.oclc.org/developer/develop/web-services/viaf/authority-cluster.en.html>.
+The viafr package functions use the VIAF (Virtual International
+Authority File) API. Optional VIAF API query parameters can be passed
+into each function. For information on supported query parameters,
+please see
+<https://www.oclc.org/developer/develop/web-services/viaf/authority-cluster.en.html>.
 
-`viaf_get()` returns a tibble, where each row contains information about the respective VIAF identifier, whereas `viaf_search()` and `viaf_suggest()` each produce a named list of tibbles, with each tibble containing information about the respective search query. The MARC 21 field definitions are used, see, e.g., <https://www.loc.gov/marc/bibliographic/>.
+`viaf_get()` returns a tibble, where each row contains information about
+the respective VIAF identifier, whereas `viaf_search()` and
+`viaf_suggest()` each produce a named list of tibbles, with each tibble
+containing information about the respective search query. The MARC 21
+field definitions are used, see, e.g.,
+<https://www.loc.gov/marc/bibliographic/>.
 
 ``` r
 library(viafr)
@@ -171,9 +183,9 @@ filter(result$`austen`, score > 10000) %>%
 #> 12 8531          PTBNP  National Library of Portugal
 ```
 
-<!-- ## Citation -->
-<!-- To cite the viafr package, please use the citation provided at https://doi.org/10.5281/zenodo.xxx. -->
-Contributing
-------------
+## Contributing
 
-Please report issues, feature requests, and questions to the [GitHub issue tracker](https://github.com/stefanieschneider/viafr/issues). We have a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in viafr you agree to abide by its terms.
+Please report issues, feature requests, and questions to the [GitHub
+issue tracker](https://github.com/stefanieschneider/viafr/issues). We
+have a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By
+participating in viafr you agree to abide by its terms.

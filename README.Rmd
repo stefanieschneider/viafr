@@ -19,20 +19,12 @@ options(width = "100")
 
 [![Build status](https://travis-ci.org/stefanieschneider/viafr.svg?branch=master)](https://travis-ci.org/stefanieschneider/viafr)
 [![Coverage status](http://codecov.io/github/stefanieschneider/viafr/coverage.svg?branch=master)](http://codecov.io/github/stefanieschneider/viafr?branch=master)
-<!-- [![CRAN badge](http://www.r-pkg.org/badges/version/viafr)](https://cran.r-project.org/package=viafr) -->
-[![CRAN checks](https://cranchecks.info/badges/worst/viafr)](https://cran.r-project.org/web/checks/check_results_viafr.html)
 
 ## Overview
 
 This R package uses the VIAF (Virtual International Authority File) API. VIAF is an OCLC service that combines multiple LAM (Library, Archive, and Museum) name authority files into a single name authority service. It thus provides direct access to linked names for the same entity across the world's major name authority files, including national and regional variations in language, character set, and spelling. For more information go to http://viaf.org/.
 
 ## Installation
-
-<!-- You can install the released version of viafr from [CRAN](https://CRAN.R-project.org) with: -->
-
-<!-- ``` r -->
-<!-- install.packages("viafr") -->
-<!-- ``` -->
 
 To install the development version from [GitHub](https://github.com/stefanieschneider/viafr) use:
 
@@ -75,10 +67,6 @@ pull(result$`Menzel`, text) %>% pluck(2)
 filter(result$`austen`, score > 10000) %>%
   pull(source_ids) %>% pluck(1)
 ```
-
-<!-- ## Citation -->
-
-<!-- To cite the viafr package, please use the citation provided at https://doi.org/10.5281/zenodo.xxx. -->
 
 ## Contributing
 

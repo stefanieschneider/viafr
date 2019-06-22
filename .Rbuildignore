@@ -5,4 +5,5 @@
 ^README.Rmd
 ^data-raw$
 ^\.travis.yml
+^appveyor.yml
 ^codecov.yml
