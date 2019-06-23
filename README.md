@@ -18,7 +18,7 @@ and Museum) name authority files into a single name authority service.
 It thus provides direct access to linked names for the same entity
 across the world’s major name authority files, including national and
 regional variations in language, character set, and spelling. For more
-information go to <http://viaf.org/>.
+information go to <https://viaf.org/>.
 
 ## Installation
 
@@ -189,5 +189,6 @@ filter(result$`austen`, score > 10000) %>%
 
 Please report issues, feature requests, and questions to the [GitHub
 issue tracker](https://github.com/stefanieschneider/viafr/issues). We
-have a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By
-participating in viafr you agree to abide by its terms.
+have a [Contributor Code of
+Conduct](https://github.com/stefanieschneider/viafr/blob/master/CODE_OF_CONDUCT.md).
+By participating in viafr you agree to abide by its terms.

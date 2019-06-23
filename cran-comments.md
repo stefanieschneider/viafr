@@ -1,9 +1,14 @@
+## Resubmission
+This is a resubmission. In this version I have:
+* linked to CODE_OF_CONDUCT.md via a fully specified URL
+* omitted “This R package uses” in the description field
+
 ## Test environments
 * local Windows x64 install, R 3.6.0
 * Ubuntu 14.04 (on Travis CI), R-release, R-oldrel, R-devel
 * macOS (on Travis CI), R-release, R-oldrel
-* Windows i386 (on Appveyor), R-release, R-oldrel, R-devel
-* Windows x64 (on Appveyor), R-release, R-oldrel, R-devel
+* Windows i386 (on AppVeyor), R-release, R-oldrel, R-devel
+* Windows x64 (on AppVeyor), R-release, R-oldrel, R-devel
 * win-builder, R-release, R-oldrel, R-devel
 * R-hub
   * Fedora Linux, R-devel, clang, gfortran
