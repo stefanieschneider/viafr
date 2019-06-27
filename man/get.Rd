@@ -22,6 +22,6 @@ An internet connection is required. The MARC 21 field
 definitions are used.
 }
 \examples{
-\dontrun{viaf_get(c("64013650", "102333412"))}
+\donttest{viaf_get(c("64013650", "102333412"))}
 
 }

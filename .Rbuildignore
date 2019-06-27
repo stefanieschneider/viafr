@@ -8,4 +8,3 @@
 ^\.travis.yml
 ^appveyor.yml
 ^codecov.yml
-^CRAN-RELEASE$

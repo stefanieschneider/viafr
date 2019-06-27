@@ -10,7 +10,7 @@
 #' definitions are used.
 #'
 #' @examples
-#' \dontrun{viaf_search(c("Rembrandt", "Jane Austen"))}
+#' \donttest{viaf_search(c("Rembrandt", "Jane Austen"))}
 #'
 #' @importFrom purrr map set_names
 #' @importFrom magrittr "%>%"

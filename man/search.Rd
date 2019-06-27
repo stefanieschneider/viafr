@@ -22,6 +22,6 @@ An internet connection is required. The MARC 21 field
 definitions are used.
 }
 \examples{
-\dontrun{viaf_search(c("Rembrandt", "Jane Austen"))}
+\donttest{viaf_search(c("Rembrandt", "Jane Austen"))}
 
 }

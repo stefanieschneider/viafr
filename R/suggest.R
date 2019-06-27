@@ -9,7 +9,7 @@
 #' @note An internet connection is required.
 #'
 #' @examples
-#' \dontrun{viaf_suggest(c("rembrandt", "austen"))}
+#' \donttest{viaf_suggest(c("rembrandt", "austen"))}
 #'
 #' @importFrom purrr map set_names
 #' @importFrom magrittr "%>%"

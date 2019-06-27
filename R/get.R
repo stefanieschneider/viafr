@@ -10,7 +10,7 @@
 #' definitions are used.
 #'
 #' @examples
-#' \dontrun{viaf_get(c("64013650", "102333412"))}
+#' \donttest{viaf_get(c("64013650", "102333412"))}
 #'
 #' @importFrom purrr map
 #' @importFrom magrittr "%>%"

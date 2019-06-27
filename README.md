@@ -3,6 +3,7 @@
 
 # viafr <img src="man/figures/logo.png" align="right" width="120" />
 
+[![Lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Travis CI Build
 status](https://travis-ci.org/stefanieschneider/viafr.svg?branch=master)](https://travis-ci.org/stefanieschneider/viafr)
 [![AppVeyor Build
@@ -145,10 +146,10 @@ pull(result$`Menzel`, source_ids)
 
 pull(result$`Menzel`, text) %>% pluck(2)
 #> # A tibble: 2 x 9
-#>      id count a           d     f     l      s         t                                    `0`     
-#>   <int> <int> <chr>       <chr> <chr> <chr>  <chr>     <chr>                                <chr>   
-#> 1     1     1 Muller-Bro~ 1914- 1961  German "Menzel-~ Graphic artist and his design probl~ (viaf)3~
-#> 2     1     1 Muller-Bro~ 1914- 1961  <NA>   "Menzel-~ Gestaltungsprobleme des Grafikers    <NA>
+#>      id count a           d       f     l      s         t                                   `0`    
+#>   <int> <int> <chr>       <chr>   <chr> <chr>  <chr>     <chr>                               <chr>  
+#> 1     1     1 Müller-Bro~ 1914-1~ 1961  German "Menzel-~ Graphic artist and his design prob~ (viaf)~
+#> 2     1     1 Müller-Bro~ 1914-1~ 1961  <NA>   "Menzel-~ Gestaltungsprobleme des Grafikers   <NA>
 
 (result <- viaf_suggest("austen"))
 #> $austen

@@ -1,7 +1,8 @@
 ## Resubmission
 This is a resubmission. In this version I have:
-* linked to CODE_OF_CONDUCT.md via a fully specified URL
-* omitted “This R package uses” in the description field
+* replaced `\dontrun{}` by `\donttest{}`
+* wrote API names in single quotes
+* omitted “R” in the title field
 
 ## Test environments
 * local Windows x64 install, R 3.6.0
