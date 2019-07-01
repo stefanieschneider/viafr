@@ -3,11 +3,15 @@
 
 # viafr <img src="man/figures/logo.png" align="right" width="120" />
 
-[![Lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![Travis CI Build
+[![Lifecycle
+badge](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![CRAN
+badge](http://www.r-pkg.org/badges/version/viafr)](https://cran.r-project.org/package=viafr)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3265046.svg)](https://doi.org/10.5281/zenodo.3265046)
+[![Travis CI build
 status](https://travis-ci.org/stefanieschneider/viafr.svg?branch=master)](https://travis-ci.org/stefanieschneider/viafr)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/stefanieschneider/viafr?branch=master&svg=true)](https://ci.appveyor.com/project/stefanieschneider/viafr)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/stefanieschneider/viafr?branch=master&svg=true)](https://ci.appveyor.com/project/stefanieschneider/viafr)
 [![Coverage
 status](http://codecov.io/github/stefanieschneider/viafr/coverage.svg?branch=master)](http://codecov.io/github/stefanieschneider/viafr?branch=master)
 
@@ -22,6 +26,13 @@ regional variations in language, character set, and spelling. For more
 information go to <https://viaf.org/>.
 
 ## Installation
+
+You can install the released version of viafr from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("viafr")
+```
 
 To install the development version from
 [GitHub](https://github.com/stefanieschneider/viafr) use:

@@ -43,6 +43,12 @@ environment:
 
 matrix:
   fast_finish: true
+  allow_failures:
+    - platform: x86
+      configuration: devel
+
+    - platform: x64
+      configuration: devel
 
 build_script:
   - travis-tool.sh install_deps
