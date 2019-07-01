@@ -1,9 +1,3 @@
-## Resubmission
-This is a resubmission. In this version I have:
-* replaced `\dontrun{}` by `\donttest{}`
-* wrote API names in single quotes
-* omitted “R” in the title field
-
 ## Test environments
 * local Windows x64 install, R 3.6.0
 * Ubuntu 14.04 (on Travis CI), R-release, R-oldrel, R-devel

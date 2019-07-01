@@ -3,7 +3,7 @@
 \docType{data}
 \name{authorities}
 \alias{authorities}
-\title{VIAF authorities}
+\title{VIAF Authorities}
 \format{A tibble with 55 rows and 2 variables.}
 \usage{
 data(authorities)

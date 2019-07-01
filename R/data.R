@@ -1,4 +1,4 @@
-#' VIAF authorities
+#' VIAF Authorities
 #'
 #' A dataset containing the names and schemes of 55 organizations
 #' and libraries that participate in the VIAF.

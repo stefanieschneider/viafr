@@ -47,6 +47,8 @@ get_suggest <- function(x) {
     )
   }
 
+  authorities <- get("authorities")
+
   metadata <- as_tibble(x$result) %>%
     rename(
       viaf_id = "viafid", text = "term",
@@ -62,7 +64,7 @@ get_suggest <- function(x) {
         ~ enframe(.) %>% unnest() %>% drop_na() %>%
           rename(id = "value", scheme = "name") %>%
           mutate(scheme = toupper(.data$scheme)) %>%
-          left_join(get("authorities"), by = "scheme") %>%
+          left_join(authorities, by = "scheme") %>%
           select(.data$id, .data$scheme, .data$name)
       )
     )

@@ -26,7 +26,7 @@ viaf_retrieve <- function(endpoint = NULL, ...) {
     stop("VIAF query could not be parsed.")
   }
 
-  url <- "http://www.viaf.org/viaf/"
+  url <- "https://www.viaf.org/viaf/"
 
   if (!is.null(endpoint)) {
     url <- paste0(url, endpoint)
@@ -41,6 +41,7 @@ viaf_retrieve <- function(endpoint = NULL, ...) {
     )
   )
 
+  # always overwrite query parameter
   args$httpAccept <- "application/json"
 
   result <- cli$get(query = args)
@@ -48,8 +49,12 @@ viaf_retrieve <- function(endpoint = NULL, ...) {
 
   if (result$status_code == 200L) {
     return_value <- tryCatch({
-      jsonlite::fromJSON(result$parse("UTF-8"))
-    }, error = function(e) return(return_value))
+      jsonlite::fromJSON(
+        result$parse("UTF-8")
+      )
+    }, error = function(e)
+      return(return_value)
+    )
   }
 
   if (is.null(return_value)) {
@@ -110,6 +115,7 @@ get_name_type <- function(x) {
 find_field <- function(x, name, exclude = NULL) {
   x <- unlist(x) # entirely flatten list of lists
 
+  # unique numerical prefix for proper addressing
   names(x) <- paste0(seq_along(x), ".", names(x))
   field <- str_subset(names(x), paste0(".*\\.", name))
 
