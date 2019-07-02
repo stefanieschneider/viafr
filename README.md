@@ -5,9 +5,9 @@
 
 [![Lifecycle
 badge](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3265046.svg)](https://doi.org/10.5281/zenodo.3265046)
 [![CRAN
 badge](http://www.r-pkg.org/badges/version/viafr)](https://cran.r-project.org/package=viafr)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3265046.svg)](https://doi.org/10.5281/zenodo.3265046)
 [![Travis CI build
 status](https://travis-ci.org/stefanieschneider/viafr.svg?branch=master)](https://travis-ci.org/stefanieschneider/viafr)
 [![AppVeyor build
