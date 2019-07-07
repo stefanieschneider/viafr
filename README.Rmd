@@ -13,6 +13,9 @@ knitr::opts_chunk$set(
 )
 
 options(width = "100")
+
+require(magrittr)
+require(viafr)
 ```
 
 # viafr <img src="man/figures/logo.png" align="right" width="120" />
@@ -49,33 +52,43 @@ The viafr package functions use the VIAF (Virtual International Authority File) 
 
 `viaf_get()` returns a tibble, where each row contains information about the respective VIAF identifier, whereas `viaf_search()` and `viaf_suggest()` each produce a named list of tibbles, with each tibble containing information about the respective search query. The MARC 21 field definitions are used, see, e.g., https://www.loc.gov/marc/bibliographic/.
 
-```{r example, message=FALSE, warning=FALSE}
-library(viafr)
+### Get Data for VIAF Identifier(s)
 
-library(dplyr)
-library(purrr)
+```{r example_get, message=FALSE, warning=FALSE}
+(result_get <- viaf_get("15873"))
 
-(result <- viaf_get("15873"))
+# Retrieve a tibble of all source identifiers
+(source_ids <- dplyr::pull(result_get, source_ids) %>% purrr::pluck(1))
 
-pull(result, source_ids) %>% pluck(1)
+# Retrieve a tibble of data from all sources
+(text <- dplyr::pull(result_get, text) %>% purrr::pluck(1))
 
-pull(result, text) %>% pluck(1)
+# Aggregate name variants and show dominant ones 
+# (subfield code `a` declares personal names)
+dplyr::mutate(text, name_variant = a) %>% dplyr::group_by(a) %>% 
+  dplyr::summarise(count = sum(count)) %>% dplyr::filter(count > 9)
+```
 
-# aggregate name variants and show dominant ones
-pull(result, text) %>% pluck(1) %>% select(count, a) %>%
-  group_by(a) %>% summarise(count = sum(count)) %>%
-  arrange(-count) %>% filter(count > 9)
+### Search VIAF records
 
-(result <- viaf_search("Menzel", maximumRecords = 5))
+```{r example_search, message=FALSE, warning=FALSE}
+(result_search <- viaf_search("Menzel", maximumRecords = 5))
 
-pull(result$`Menzel`, source_ids)
+# Retrieve a tibble of all source identifiers
+(source_ids <- dplyr::pull(result_search$`Menzel`, source_ids))
 
-pull(result$`Menzel`, text) %>% pluck(2)
+# Retrieve a tibble of data for the second search result
+(text <- dplyr::pull(result_search$`Menzel`, text) %>% purrr::pluck(2))
+```
 
-(result <- viaf_suggest("austen"))
+### Suggest VIAF records
 
-filter(result$`austen`, score > 10000) %>%
-  pull(source_ids) %>% pluck(1)
+```{r example_suggest, message=FALSE, warning=FALSE}
+(result_suggest <- viaf_suggest("austen"))
+
+# Retrieve source identifiers for the most relevant search result
+dplyr::filter(result_suggest$`austen`, score > 10000) %>%
+  dplyr::pull(source_ids) %>% purrr::pluck(1)
 ```
 
 ## Contributing
