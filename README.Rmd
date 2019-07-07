@@ -65,7 +65,7 @@ The viafr package functions use the VIAF (Virtual International Authority File) 
 
 # Aggregate name variants and show dominant ones 
 # (subfield code `a` declares personal names)
-dplyr::mutate(text, name_variant = a) %>% dplyr::group_by(a) %>% 
+dplyr::mutate(text, name_variant = a) %>% dplyr::group_by(name_variant) %>% 
   dplyr::summarise(count = sum(count)) %>% dplyr::filter(count > 9)
 ```
 

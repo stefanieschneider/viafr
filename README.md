@@ -102,10 +102,10 @@ field definitions are used, see, e.g.,
 
 # Aggregate name variants and show dominant ones 
 # (subfield code `a` declares personal names)
-dplyr::mutate(text, name_variant = a) %>% dplyr::group_by(a) %>% 
+dplyr::mutate(text, name_variant = a) %>% dplyr::group_by(name_variant) %>% 
   dplyr::summarise(count = sum(count)) %>% dplyr::filter(count > 9)
 #> # A tibble: 3 x 2
-#>   a              count
+#>   name_variant   count
 #>   <chr>          <int>
 #> 1 Pablo Picasso     27
 #> 2 Picasso           14
