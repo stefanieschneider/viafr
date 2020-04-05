@@ -9,3 +9,6 @@
 ^appveyor.yml
 ^codecov.yml
 ^CRAN-RELEASE$
+^viafr\.Rcheck$
+^viafr.*\.tar\.gz$
+^viafr.*\.tgz$

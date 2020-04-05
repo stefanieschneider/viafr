@@ -7,7 +7,7 @@ Description: Provides direct access to linked names for the same entity across t
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
 URL: https://github.com/stefanieschneider/viafr
 BugReports: https://github.com/stefanieschneider/viafr/issues
 Suggests: 

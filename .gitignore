@@ -2,3 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
+viafr.Rcheck/
+viafr*.tar.gz
+viafr*.tgz

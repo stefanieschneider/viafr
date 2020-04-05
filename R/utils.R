@@ -1,7 +1,7 @@
 #' @importFrom utf8 utf8_normalize
 normalize <- function(x) {
-  result <- purrr::set_names(x, utf8_normalize(colnames(x))) %>%
-    dplyr::mutate_if(is.character, list(~ utf8_normalize(.)))
+  result <- purrr::set_names(x, utf8_normalize(colnames(x))) # %>%
+    # dplyr::mutate_if(is.character, list(~ utf8_normalize(.)))
 
   return(result)
 }

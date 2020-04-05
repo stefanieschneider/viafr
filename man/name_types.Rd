@@ -4,7 +4,9 @@
 \name{name_types}
 \alias{name_types}
 \title{VIAF Name Types}
-\format{A tibble with 5 rows and 2 variables.}
+\format{
+A tibble with 5 rows and 2 variables.
+}
 \usage{
 data(name_types)
 }
