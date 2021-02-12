@@ -38,3 +38,7 @@ test_that("valid query", {
   expect_equal(class(result$source_ids), "list")
   expect_equal(class(result$source_ids[[1]]), tbl_class)
 })
+
+test_that("query with no sources", {
+  expect_error(viaf_suggest("BESSHI COPPER MINE"), NA)
+})

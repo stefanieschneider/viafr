@@ -1,3 +1,8 @@
+# viafr 0.3.0
+
+* Fix bug in `viaf_suggest()` if there are no source identifiers
+
+
 # viafr 0.2.0
 
 * Fix problems with upgrade of package `tibble` to version 3.0.0

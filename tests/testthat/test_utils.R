@@ -3,8 +3,8 @@ context("Utils")
 test_that("invalid query", {
   expect_error(viaf_retrieve())
 
-  expect_warning(viaf_retrieve("10233341"))
-  expect_true(is.null(viaf_retrieve("10233341")))
+  expect_warning(result <- viaf_retrieve("10233341"))
+  expect_true(is.null(result))
 })
 
 test_that("valid query", {
