@@ -1,6 +1,8 @@
 # viafr 0.3.0
 
 * Fix bug in `viaf_suggest()` if there are no source identifiers
+* Skip tests if on CRAN or [VIAF](https://www.viaf.org/) is offline
+* Fail gracefully if request failed with status code other than 200
 
 
 # viafr 0.2.0
