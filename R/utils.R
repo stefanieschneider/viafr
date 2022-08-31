@@ -55,12 +55,10 @@ viaf_retrieve <- function(endpoint = NULL, ...) {
     }, error = function(e)
       return(return_value)
     )
-  }
-
-  if (is.null(return_value)) {
-    warning(
+  } else {
+    message(
       sprintf("Query to %s failed with status code %s.",
-        result$url, result$status_code), call. = FALSE
+        result$url, result$status_code)
     )
   }
 

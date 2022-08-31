@@ -1,5 +1,8 @@
 context("Get")
 
+skip_on_cran()
+skip_if_offline(host = "viaf.org")
+
 test_that("query list", {
   expect_equal(
     unlist(viaf_get(list("102333412"))),
