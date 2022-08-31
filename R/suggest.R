@@ -24,6 +24,10 @@ viaf_suggest <- function(query = NULL, ...) {
   if (is.list(query)) query <- unlist(query)
   assertthat::assert_that(is.vector(query))
 
+  if (any(sapply(query, nchar) == 0)) {
+    warning("At least one VIAF query is empty.")
+  }
+
   endpoint <- "AutoSuggest"
 
   items <- map(query, viaf_retrieve_query, endpoint = endpoint,

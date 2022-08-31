@@ -25,6 +25,10 @@ viaf_get <- function(query = NULL, ...) {
   if (is.list(query)) query <- unlist(query)
   assertthat::assert_that(is.vector(query))
 
+  if (any(sapply(query, nchar) == 0)) {
+    warning("At least one VIAF query is empty.")
+  }
+
   items <- map(query, viaf_retrieve, ...) %>%
     map(get_identifier) %>% dplyr::bind_rows()
 
