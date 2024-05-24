@@ -57,20 +57,21 @@ VN,VG,VI,WF,EH,YE,ZM,ZW,AX
     <xsl:attribute name="viafrVersion"><xsl:value-of select="$viafrversion" /></xsl:attribute>
     <xsl:attribute name="processDate"><xsl:value-of select="$now" /></xsl:attribute>
     <row>
-        <viafID class="character"><xsl:value-of select="$viafID" /></viafID>
-        <viafType class="character"><xsl:value-of select="$nameType" /></viafType>
-        <name class="character"><xsl:value-of select="$name" /></name>
-        <gender class="character"><xsl:value-of select="$gender" /></gender>
-        <birthDate class="character"><xsl:value-of select="$birthDate" /></birthDate>
-        <deathDate class="character"><xsl:value-of select="$deathDate" /></deathDate>
-        <dateType class="character"><xsl:value-of select="$dateType" /></dateType>
-        <nationalities class="character"><xsl:value-of select="$nationalities" /></nationalities>
-        <affiliations class="integer"><xsl:value-of select="$affiliations" /></affiliations>
-        <sourceCount class="integer"><xsl:value-of select="$sourceCount" /></sourceCount>
-        <uniqueISBNs class="integer"><xsl:value-of select="$uniqueISBNs" /></uniqueISBNs>
-        <coauthorsPersonal class="integer"><xsl:value-of select="$coauthorsPersonal" /></coauthorsPersonal>
-        <coauthorsCorp class="integer"><xsl:value-of select="$coauthorsCorp" /></coauthorsCorp>
-        <viaf-update class="POSIXct"><xsl:value-of select="$viafUpdate" /></viaf-update>
+        <viafID ct="character"><xsl:value-of select="$viafID" /></viafID>
+        <viafType ct="character"><xsl:value-of select="$nameType" /></viafType>
+        <name ct="character"><xsl:value-of select="$name" /></name>
+        <gender ct="character"><xsl:value-of select="$gender" /></gender>
+        <birthDate ct="character"><xsl:value-of select="$birthDate" /></birthDate>
+        <deathDate ct="character"><xsl:value-of select="$deathDate" /></deathDate>
+        <dateType ct="character"><xsl:value-of select="$dateType" /></dateType>
+        <nationalities ct="character"><xsl:value-of select="$nationalities" /></nationalities>
+        <affiliations ct="integer"><xsl:value-of select="$affiliations" /></affiliations>
+        <sourceCount ct="integer"><xsl:value-of select="$sourceCount" /></sourceCount>
+        <uniqueISBNs ct="integer"><xsl:value-of select="$uniqueISBNs" /></uniqueISBNs>
+        <coauthorsPersonal ct="integer"><xsl:value-of select="$coauthorsPersonal" /></coauthorsPersonal>
+        <coauthorsCorp ct="integer"><xsl:value-of select="$coauthorsCorp" /></coauthorsCorp>
+        <viaf-update ct="POSIXct"><xsl:value-of select="$viafUpdate" /></viaf-update>
+        <accessed ct="POSIXct"><xsl:value-of select="$now" /></accessed>
     </row>
 </summary>
 </xsl:template>

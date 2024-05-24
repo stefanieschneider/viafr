@@ -1,3 +1,25 @@
+# viafr 0.4.2
+
+* Functionality for searching coauthor VIAF clusters
+
+# viafr 0.4.1
+
+* Add 'full' set of xsl stylesheets and functions
+* vc_ISBNs
+* vc_authorship
+* vc_covers
+* vc_jointcorps
+* vc_jointpersons
+* vc_names
+* vc_sources
+* vc_summary
+* vc_titles
+* vc_viaflinks
+
+# viafr 0.4.0
+
+* Add initial xml-based summary xsl stylesheet and functionality
+
 # viafr 0.3.0
 
 * Fix bug in `viaf_suggest()` if there are no source identifiers

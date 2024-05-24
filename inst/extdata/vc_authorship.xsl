@@ -128,13 +128,14 @@ version="1.0" type="text" >
     <xsl:param name="sequence" />
     <xsl:param name="exactText" />
     <row>
-    <viafID class="character"><xsl:value-of select="$viafID" /></viafID>
-    <viafType class="character"><xsl:value-of select="$viafType" /></viafType>
-    <relType class="character"><xsl:value-of select="$type" /></relType>
-    <pos class="integer"><xsl:value-of select="$sequence" /></pos>
-    <source class="character"><xsl:value-of select="." /></source>
-    <value class="character"><xsl:value-of select="$exactText" /></value>
-    <viaf-update class="POSIXct"><xsl:value-of select="$viafUpdate" /></viaf-update>
+    <viafID ct="character"><xsl:value-of select="$viafID" /></viafID>
+    <viafType ct="character"><xsl:value-of select="$viafType" /></viafType>
+    <relType ct="character"><xsl:value-of select="$type" /></relType>
+    <pos ct="integer"><xsl:value-of select="$sequence" /></pos>
+    <source ct="character"><xsl:value-of select="." /></source>
+    <value ct="character"><xsl:value-of select="$exactText" /></value>
+    <viaf-update ct="POSIXct"><xsl:value-of select="$viafUpdate" /></viaf-update>
+    <accessed ct="POSIXct"><xsl:value-of select="$now" /></accessed>
     </row>
 </xsl:template>
 

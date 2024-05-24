@@ -56,14 +56,15 @@ version="1.0" type="text" >
     <xsl:param name="tag" />
     <xsl:param name="source" />
 <row>
-    <viafID class="character"><xsl:value-of select="$viafID" /></viafID>
-    <viafType class="character"><xsl:value-of select="$viafType" /></viafType>
-    <namevalue class="character"><xsl:value-of select="$namevalue" /></namevalue>
-    <tag class="character"><xsl:value-of select="$tag" /></tag>
-    <fromSource class="character"><xsl:value-of select="$source" /></fromSource>
-    <toSource class="character"><xsl:value-of select="substring-before(.,'|')" /></toSource>
-    <matchtype class="character"><xsl:value-of select="ns1:match/@type" /></matchtype>
-    <viaf-update class="POSIXct"><xsl:value-of select="$viafUpdate" /></viaf-update>
+    <viafID ct="character"><xsl:value-of select="$viafID" /></viafID>
+    <viafType ct="character"><xsl:value-of select="$viafType" /></viafType>
+    <namevalue ct="character"><xsl:value-of select="$namevalue" /></namevalue>
+    <tag ct="character"><xsl:value-of select="$tag" /></tag>
+    <fromSource ct="character"><xsl:value-of select="$source" /></fromSource>
+    <toSource ct="character"><xsl:value-of select="substring-before(.,'|')" /></toSource>
+    <matchtype ct="character"><xsl:value-of select="ns1:match/@type" /></matchtype>
+    <viaf-update ct="POSIXct"><xsl:value-of select="$viafUpdate" /></viaf-update>
+    <accessed ct="POSIXct"><xsl:value-of select="$now" /></accessed>
 </row>
 </xsl:template>
 

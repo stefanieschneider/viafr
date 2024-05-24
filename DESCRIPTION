@@ -1,6 +1,6 @@
 Package: viafr
 Title: Interface to the 'VIAF' ('Virtual International Authority File') API
-Version: 0.4.1
+Version: 0.4.3
 Authors@R: c(
     person('Stefanie Schneider', 
             email = 'stefanie.schneider@itg.uni-muenchen.de', role = c('cre', 'aut'),
@@ -21,6 +21,7 @@ Suggests:
 Imports: 
     utf8,
     crul,
+    curl,
     jsonlite,
     assertthat,
     magrittr,

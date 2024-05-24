@@ -19,12 +19,13 @@ version="1.0" type="text" >
 <xsl:template match="ns1:sources/ns1:source" >
     <xsl:param name="viafID"/>
 <row>
-    <viafID class="character"><xsl:value-of select="$viafID" /></viafID>
-    <nsid class="character"><xsl:value-of select="@nsid" /></nsid>
-    <sparse class="logical"><xsl:value-of select="@sparse" /></sparse>
-    <s class="character"><xsl:value-of select="substring-before(., '|')" /></s>
-    <sid class="character"><xsl:value-of select="." /></sid>
-    <viaf-update class="POSIXct"><xsl:value-of select="$viafUpdate" /></viaf-update>
+    <viafID ct="character"><xsl:value-of select="$viafID" /></viafID>
+    <nsid ct="character"><xsl:value-of select="@nsid" /></nsid>
+    <sparse ct="logical"><xsl:value-of select="@sparse" /></sparse>
+    <s ct="character"><xsl:value-of select="substring-before(., '|')" /></s>
+    <sid ct="character"><xsl:value-of select="." /></sid>
+    <viaf-update ct="POSIXct"><xsl:value-of select="$viafUpdate" /></viaf-update>
+    <accessed ct="POSIXct"><xsl:value-of select="$now" /></accessed>
 </row>
 </xsl:template>
 
