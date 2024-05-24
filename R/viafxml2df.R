@@ -10,7 +10,7 @@
 #' @usage viafxml2df(x, xslt=NULL, ...)
 #' @param x Loaded viaf.xml document.
 #' @param xslt Loaded xslt stylesheet
-#' @param intercache Directory in which to story intermediate xml
+#' @param intercache Directory in which to store intermediate xml
 #' output from transform.
 #'
 #' @import dplyr
