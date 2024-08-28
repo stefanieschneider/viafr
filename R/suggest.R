@@ -30,8 +30,14 @@ viaf_suggest <- function(query = NULL, ...) {
 
   endpoint <- "AutoSuggest"
 
-  items <- map(query, viaf_retrieve_query, endpoint = endpoint,
-      ...) %>% map(get_suggest) %>% set_names(query)
+  items <- map(
+      query,
+      viaf_retrieve_query,
+      endpoint = endpoint,
+      ...
+    ) %>%
+    map(get_suggest) %>%
+    set_names(query)
 
   return(items)
 }
@@ -45,8 +51,11 @@ get_suggest <- function(x) {
   if (is.null(x$result)) {
     return(
       tibble(
-        viaf_id = NA, source_ids = list(),
-        name_type = NA, text = NA, score = NA
+        viaf_id = NA,
+        source_ids = list(),
+        name_type = NA,
+        text = NA,
+        score = NA
       )
     )
   }
@@ -55,7 +64,8 @@ get_suggest <- function(x) {
 
   metadata <- as_tibble(x$result) %>%
     rename(
-      viaf_id = "viafid", text = "term",
+      viaf_id = "viafid",
+      text = "term",
       name_type = "nametype"
     )
 
@@ -65,15 +75,20 @@ get_suggest <- function(x) {
         source_ids = map(
           # columns that every record exhibits
           transpose(select(., -c(
-            .data$text, .data$displayForm, .data$name_type,
-            .data$viaf_id, .data$score, .data$recordID
+            "text",
+            "displayForm",
+            "name_type",
+            "viaf_id",
+            "score",
+            "recordID"
           ))),
-          ~ enframe(.) %>% unnest(cols = names(.)) %>%
+          ~ enframe(.) %>%
+            unnest(cols = names(.)) %>%
             drop_na() %>%  # drop totally empty columns
             rename(id = "value", scheme = "name") %>%
-            mutate(scheme = toupper(.data$scheme)) %>%
+            mutate(scheme = toupper(scheme)) %>%
             left_join(authorities, by = "scheme") %>%
-            select(.data$id, .data$scheme, .data$name)
+            select(id, scheme, name)
         )
       )
   } else {
@@ -82,8 +97,11 @@ get_suggest <- function(x) {
 
   metadata <- get_name_type(metadata) %>%
     select(
-      .data$viaf_id, .data$source_ids,
-      .data$name_type, .data$text, .data$score
+      "viaf_id",
+      "source_ids",
+      "name_type",
+      "text",
+      "score"
     )
 
   return(normalize(ungroup(metadata)))

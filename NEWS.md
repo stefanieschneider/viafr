@@ -1,3 +1,9 @@
+# viafr 0.3.1
+
+* Split given name and family name in DESCRIPTION
+* Use of `.data` in tidyselect expressions was deprecated in version 1.2.0
+
+
 # viafr 0.3.0
 
 * Fix bug in `viaf_suggest()` if there are no source identifiers

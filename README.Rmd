@@ -23,7 +23,6 @@ require(viafr)
 [![Lifecycle badge](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3265046.svg)](https://doi.org/10.5281/zenodo.3265046)
 [![CRAN badge](http://www.r-pkg.org/badges/version/viafr)](https://cran.r-project.org/package=viafr)
-[![Travis CI build status](https://travis-ci.org/stefanieschneider/viafr.svg?branch=master)](https://travis-ci.org/stefanieschneider/viafr)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/stefanieschneider/viafr?branch=master&svg=true)](https://ci.appveyor.com/project/stefanieschneider/viafr)
 [![Coverage status](https://codecov.io/github/stefanieschneider/viafr/coverage.svg?branch=master)](https://codecov.io/github/stefanieschneider/viafr?branch=master)
 
@@ -35,13 +34,13 @@ This R package uses the VIAF (Virtual International Authority File) API. VIAF is
 
 You can install the released version of viafr from [CRAN](https://CRAN.R-project.org) with:
 
-``` r
+```r
 install.packages("viafr")
 ```
 
 To install the development version from [GitHub](https://github.com/stefanieschneider/viafr) use:
 
-``` r
+```r
 # install.packages("devtools")
 devtools::install_github("stefanieschneider/viafr")
 ```
@@ -51,23 +50,6 @@ devtools::install_github("stefanieschneider/viafr")
 The viafr package functions use the VIAF (Virtual International Authority File) API. Optional VIAF API query parameters can be passed into each function. For information on supported query parameters, please see https://www.oclc.org/developer/api/oclc-apis/viaf.en.html.
 
 `viaf_get()` returns a tibble, where each row contains information about the respective VIAF identifier, whereas `viaf_search()` and `viaf_suggest()` each produce a named list of tibbles, with each tibble containing information about the respective search query. The MARC 21 field definitions are used, see, e.g., https://www.loc.gov/marc/bibliographic/.
-
-### Get Data for VIAF Identifier(s)
-
-```{r example_get, message=FALSE, warning=FALSE}
-(result_get <- viaf_get("15873"))
-
-# Retrieve a tibble of all source identifiers
-(source_ids <- dplyr::pull(result_get, source_ids) %>% purrr::pluck(1))
-
-# Retrieve a tibble of data from all sources
-(text <- dplyr::pull(result_get, text) %>% purrr::pluck(1))
-
-# Aggregate name variants and show dominant ones 
-# (subfield code `a` declares personal names)
-dplyr::mutate(text, name_variant = a) %>% dplyr::group_by(name_variant) %>% 
-  dplyr::summarise(count = sum(count)) %>% dplyr::filter(count > 9)
-```
 
 ### Search VIAF records
 

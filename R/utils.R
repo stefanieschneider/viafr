@@ -66,7 +66,8 @@ viaf_retrieve <- function(endpoint = NULL, ...) {
 }
 
 viaf_retrieve_query <- function(query, endpoint, ...) {
-  args <- list(...); args$query <- query
+  args <- list(...)
+  args$query <- query
   do.call(viaf_retrieve, c(endpoint, args))
 }
 
@@ -76,11 +77,15 @@ viaf_retrieve_query <- function(query, endpoint, ...) {
 #' @importFrom rlang .data
 get_source_ids <- function(x) {
   result <- tibble::as_tibble(x) %>%
-    rename(id = "@nsid", scheme = "#text") %>%
+    rename(
+      id = "@nsid",
+      scheme = "#text"
+    ) %>%
     mutate(
-      id = stringr::str_remove_all(.data$id, "^\\.|.*/"),
+      id = stringr::str_remove_all(id, "^\\.|.*/"),
       scheme = map_chr(
-        .data$scheme, ~ strsplit(., "\\|") %>% pluck(1, 1)
+        .data$scheme,
+        ~ strsplit(., "\\|") %>% pluck(1, 1)
       )
     ) %>%
     left_join(get("authorities"), by = "scheme")
@@ -93,18 +98,19 @@ get_source_ids <- function(x) {
 #' @importFrom rlang .data
 get_name_type <- function(x) {
   if (length(unlist(x)) == 1) {
-    x <- tibble(name_type = x)
+    x <- tibble("name_type" = x)
   }
 
   result <- as_tibble(x) %>%
     mutate(
-      name_type = tolower(.data$name_type) %>%
+      name_type = tolower("name_type") %>%
         stringr::str_remove_all("\\s")
     ) %>%
     left_join(
-      get("name_types"), by = c("name_type" = "id")
+      get("name_types"),
+      by = c("name_type" = "id")
     ) %>%
-    mutate(name_type = .data$name)
+    mutate(name_type = "name")
 
   return(result)
 }
@@ -137,12 +143,13 @@ get_text <- function(x) {
   x <- find_field(x, name = "subfield", exclude = "x500")
 
   result <- tibble::tibble(
-      code = str_subset(names(x), "@code.*$"),
-      text = str_subset(names(x), "#text.*$")
+      "code" = str_subset(names(x), "@code.*$"),
+      "text" = str_subset(names(x), "#text.*$")
     ) %>%
     mutate(
       id = cumsum(str_detect(.data$code, "code(?:1)?$")),
-      code = x[.data$code], text = x[.data$text]
+      code = x[.data$code],
+      text = x[.data$text]
     ) %>%
     mutate(
       text = case_when(
@@ -152,12 +159,22 @@ get_text <- function(x) {
         )
       )
     ) %>%
-    distinct() %>% group_by(.data$id, .data$code) %>%
-    summarise(text = paste(.data$text, collapse = ", ")) %>%
-    group_by(.data$id) %>% spread(.data$code, .data$text) %>%
-    ungroup() %>% select(-id) %>% group_by_all() %>%
-    add_tally(sort = TRUE, name = "count") %>% distinct() %>%
-    mutate(id = row_number()) %>% select(id, count, everything())
+    distinct() %>%
+    group_by(id, .data$code) %>%
+    summarise(text = paste("text", collapse = ", ")) %>%
+    group_by(id) %>%
+    spread("code", "text") %>%
+    ungroup() %>%
+    select(-id) %>%
+    group_by_all() %>%
+    add_tally(sort = TRUE, name = "count") %>%
+    distinct() %>%
+    mutate(id = row_number()) %>%
+    select(
+      "id",
+      "count",
+      everything()
+    )
 
   # reorder columns first by letter, then by number
   id <- str_detect(colnames(result), "^[0-9]")

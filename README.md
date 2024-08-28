@@ -8,8 +8,6 @@ badge](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecy
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3265046.svg)](https://doi.org/10.5281/zenodo.3265046)
 [![CRAN
 badge](http://www.r-pkg.org/badges/version/viafr)](https://cran.r-project.org/package=viafr)
-[![Travis CI build
-status](https://travis-ci.org/stefanieschneider/viafr.svg?branch=master)](https://travis-ci.org/stefanieschneider/viafr)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/stefanieschneider/viafr?branch=master&svg=true)](https://ci.appveyor.com/project/stefanieschneider/viafr)
 [![Coverage
@@ -56,74 +54,19 @@ containing information about the respective search query. The MARC 21
 field definitions are used, see, e.g.,
 <https://www.loc.gov/marc/bibliographic/>.
 
-### Get Data for VIAF Identifier(s)
-
-``` r
-(result_get <- viaf_get("15873"))
-#> # A tibble: 1 × 4
-#>   viaf_id source_ids        name_type      text               
-#>   <chr>   <list>            <chr>          <list>             
-#> 1 15873   <tibble [42 × 3]> Personal Names <tibble [271 × 15]>
-
-# Retrieve a tibble of all source identifiers
-(source_ids <- dplyr::pull(result_get, source_ids) %>% purrr::pluck(1))
-#> # A tibble: 42 × 3
-#>    id                      scheme name                                                 
-#>    <chr>                   <chr>  <chr>                                                
-#>  1 "vtls002657273"         EGAXA  Library of Alexandria                                
-#>  2 "9658"                  PTBNP  National Library of Portugal                         
-#>  3 "jn19990006541"         NKC    National Library of the Czech Republic               
-#>  4 "LNC10-000029604"       LNB    National Library of Latvia                           
-#>  5 "500009666"             JPG    Union List of Artist Names [Getty Research Institute]
-#>  6 "XX1637941"             BNE    National Library of Spain                            
-#>  7 "00452768"              NDL    National Diet Library                                
-#>  8 "000035422161"          NLA    National Library of Australia                        
-#>  9 "cb11919660r"           BNF    National Library of France                           
-#> 10 "RU\\NLR\\AUTH\\778208" NLR    National Library of Russia                           
-#> # … with 32 more rows
-
-# Retrieve a tibble of data from all sources
-(text <- dplyr::pull(result_get, text) %>% purrr::pluck(1))
-#> # A tibble: 271 × 15
-#>       id count a             b     c     d     e     f     g     q     `4`   `5`   `7`   `8`   `9`  
-#>    <int> <int> <chr>         <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr>
-#>  1     1    23 Picasso, Pab… <NA>  <NA>  1881… <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  2     1     6 Picasso, Pab… <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  3     1     4 Ruiz y Picas… <NA>  <NA>  1881… <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  4     1     4 Picasso       <NA>  <NA>  1881… <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  5     1     3 Picasso Ruiz… <NA>  <NA>  1881… <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  6     1     3 Bijiasuo      <NA>  <NA>  1881… <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  7     1     3 Picasso       <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  8     1     3 Picasso, Pab… <NA>  <NA>  1881… <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#>  9     1     3 Ruiz Picasso… <NA>  <NA>  1881… <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#> 10     1     3 Ruiz, Pablo   <NA>  <NA>  1881… <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-#> # … with 261 more rows
-
-# Aggregate name variants and show dominant ones 
-# (subfield code `a` declares personal names)
-dplyr::mutate(text, name_variant = a) %>% dplyr::group_by(name_variant) %>% 
-  dplyr::summarise(count = sum(count)) %>% dplyr::filter(count > 9)
-#> # A tibble: 3 × 2
-#>   name_variant   count
-#>   <chr>          <int>
-#> 1 Pablo Picasso     43
-#> 2 Picasso           20
-#> 3 Picasso, Pablo    34
-```
-
 ### Search VIAF records
 
 ``` r
 (result_search <- viaf_search("Menzel", maximumRecords = 5))
 #> $Menzel
 #> # A tibble: 5 × 4
-#>   viaf_id                source_ids       name_type                 text            
-#>   <chr>                  <list>           <chr>                     <named list>    
-#> 1 9958151474888800490000 <tibble [1 × 3]> Uniform Title Expressions <tibble [2 × 8]>
-#> 2 9951148269716905230007 <tibble [1 × 3]> Uniform Title Expressions <tibble [2 × 9]>
-#> 3 9882160668064003560006 <tibble [1 × 3]> Personal Names            <tibble [2 × 3]>
-#> 4 9864149198241274940009 <tibble [2 × 3]> Personal Names            <tibble [1 × 3]>
-#> 5 9784165272356910690004 <tibble [1 × 3]> Uniform Title Expressions <tibble [2 × 5]>
+#>   viaf_id                source_ids       name_type text            
+#>   <chr>                  <list>           <chr>     <named list>    
+#> 1 9958151474888800490000 <tibble [1 × 3]> name      <tibble [2 × 8]>
+#> 2 9951148269716905230007 <tibble [1 × 3]> name      <tibble [2 × 8]>
+#> 3 9924169262252109510006 <tibble [1 × 3]> name      <tibble [2 × 5]>
+#> 4 9882160668064003560006 <tibble [1 × 3]> name      <tibble [1 × 3]>
+#> 5 9864149198241274940009 <tibble [2 × 3]> name      <tibble [1 × 3]>
 
 # Retrieve a tibble of all source identifiers
 (source_ids <- dplyr::pull(result_search$`Menzel`, source_ids))
@@ -141,30 +84,30 @@ dplyr::mutate(text, name_variant = a) %>% dplyr::group_by(name_variant) %>%
 #> 
 #> [[3]]
 #> # A tibble: 1 × 3
+#>   id         scheme name                   
+#>   <chr>      <chr>  <chr>                  
+#> 1 1298941520 DNB    German National Library
+#> 
+#> [[4]]
+#> # A tibble: 1 × 3
 #>   id               scheme name 
 #>   <chr>            <chr>  <chr>
 #> 1 0000000021405403 ISNI   ISNI 
 #> 
-#> [[4]]
+#> [[5]]
 #> # A tibble: 2 × 3
 #>   id        scheme name                   
 #>   <chr>     <chr>  <chr>                  
 #> 1 172842131 DNB    German National Library
-#> 2 90818949  BIBSYS BIBSYS                 
-#> 
-#> [[5]]
-#> # A tibble: 1 × 3
-#>   id            scheme name                                     
-#>   <chr>         <chr>  <chr>                                    
-#> 1 vtls003289869 NUKAT  NUKAT Center of Warsaw University Library
+#> 2 90818949  BIBSYS BIBSYS
 
 # Retrieve a tibble of data for the second search result
 (text <- dplyr::pull(result_search$`Menzel`, text) %>% purrr::pluck(2))
-#> # A tibble: 2 × 9
-#>      id count a                       d          f     l      s                t               `0`  
-#>   <int> <int> <chr>                   <chr>      <chr> <chr>  <chr>            <chr>           <chr>
-#> 1     1     1 Müller-Brockmann, Josef 1914-1996. 1961  German "Menzel-Flocon " GRAPHIC ARTIST… (via…
-#> 2     1     1 Müller-Brockmann, Josef 1914-1996. 1961  <NA>   "Menzel-Flocon " Gestaltungspro… <NA>
+#> # A tibble: 2 × 8
+#>      id count a     f     l     s     t     `0`  
+#>   <int> <int> <chr> <chr> <chr> <chr> <chr> <chr>
+#> 1     1     1 text  text  text  text  text  text 
+#> 2     1     1 text  text  <NA>  text  text  <NA>
 ```
 
 ### Suggest VIAF records
@@ -173,18 +116,18 @@ dplyr::mutate(text, name_variant = a) %>% dplyr::group_by(name_variant) %>%
 (result_suggest <- viaf_suggest("austen"))
 #> $austen
 #> # A tibble: 10 × 5
-#>    viaf_id               source_ids        name_type      text                                 score
-#>    <chr>                 <list>            <chr>          <chr>                                <chr>
-#>  1 102333412             <tibble [12 × 3]> Personal Names Austen, Jane, 1775-1817              19182
-#>  2 9943394               <tibble [8 × 3]>  Personal Names Austen Henry Layard, 1817-1894       5760 
-#>  3 66482160              <tibble [7 × 3]>  Personal Names Austen Chamberlain, 1863-1937        4452 
-#>  4 49253679              <tibble [9 × 3]>  Personal Names Austen, J. L., 1911-1960             3788 
-#>  5 351144783162295221357 <tibble [5 × 3]>  Personal Names Austen Ivereigh                      3140 
-#>  6 76472664              <tibble [6 × 3]>  Personal Names Austen-Leigh, James Edward, 1798-18… 2978 
-#>  7 3256795               <tibble [4 × 3]>  Personal Names Austen, E. E. , 1867-1938            2326 
-#>  8 64067073              <tibble [6 × 3]>  Personal Names Austen, K. Frank                     2216 
-#>  9 69175936              <tibble [7 × 3]>  Personal Names Austen, John                         2180 
-#> 10 22268931              <tibble [4 × 3]>  Personal Names Austen, Ralph A                      2060
+#>    viaf_id               source_ids        name_type text                                  score
+#>    <chr>                 <list>            <chr>     <chr>                                 <chr>
+#>  1 102333412             <tibble [12 × 3]> name      Austen, Jane, 1775-1817               20942
+#>  2 9943394               <tibble [9 × 3]>  name      Austen Henry Layard, 1817-1894        6083 
+#>  3 66482160              <tibble [8 × 3]>  name      Austen Chamberlain, 1863-1937         4550 
+#>  4 49253679              <tibble [10 × 3]> name      Austen, J. L., 1911-1960              3916 
+#>  5 351144783162295221357 <tibble [5 × 3]>  name      Austen Ivereigh                       3303 
+#>  6 76472664              <tibble [6 × 3]>  name      Austen-Leigh, James Edward, 1798-1874 2906 
+#>  7 22268931              <tibble [4 × 3]>  name      Austen, Ralph A., 1937-               2600 
+#>  8 69175936              <tibble [7 × 3]>  name      Austen, John                          2302 
+#>  9 3256795               <tibble [4 × 3]>  name      Austen, Ernest Edward, 1867-1938      2298 
+#> 10 64067073              <tibble [6 × 3]>  name      Austen, K. Frank                      2234
 
 # Retrieve source identifiers for the most relevant search result
 dplyr::filter(result_suggest$`austen`, score > 10000) %>%
@@ -200,7 +143,7 @@ dplyr::filter(result_suggest$`austen`, score > 10000) %>%
 #>  6 500249665     JPG    Union List of Artist Names [Getty Research Institute]             
 #>  7 cfiv017136    ICCU   Central Institute for the Union Catalogue of the Italian libraries
 #>  8 xx1124986     BNE    National Library of Spain                                         
-#>  9 vtls000823272 EGAXA  Library of Alexandria                                             
+#>  9 vtls823272    EGAXA  Library of Alexandria                                             
 #> 10 jn19990000321 NKC    National Library of the Czech Republic                            
 #> 11 000035010277  NLA    National Library of Australia                                     
 #> 12 8531          PTBNP  National Library of Portugal

@@ -1,5 +1,6 @@
 context("Get")
 
+skip(message = "Skipping")
 skip_on_cran()
 skip_if_offline(host = "viaf.org")
 

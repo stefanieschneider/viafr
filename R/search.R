@@ -31,8 +31,14 @@ viaf_search <- function(query = NULL, ...) {
 
   endpoint <- "search"
 
-  items <- map(query, viaf_retrieve_query, endpoint = endpoint,
-      ...) %>% map(get_search) %>% set_names(query)
+  items <- map(
+      query,
+      viaf_retrieve_query,
+      endpoint = endpoint,
+      ...
+    ) %>%
+    map(get_search) %>%
+    set_names(query)
 
   return(items)
 }
@@ -52,8 +58,10 @@ get_search <- function(x) {
   if (as.integer(n_records) == 0) {
     return(
       tibble(
-        viaf_id = NA, source_ids = list(),
-        name_type = NA, text = list()
+        viaf_id = NA,
+        source_ids = list(),
+        name_type = NA,
+        text = list()
       )
     )
   }
@@ -66,7 +74,10 @@ get_search <- function(x) {
   }
 
   metadata <- tibble::as_tibble(x) %>%
-    rename(viaf_id = "viafID", name_type = "nameType") %>%
+    rename(
+      viaf_id = "viafID",
+      name_type = "nameType"
+    ) %>%
     mutate(
       source_ids = map(!!source_ids, get_source_ids),
       text = map(split(x, 1:nrow(x)), get_text)
@@ -74,8 +85,10 @@ get_search <- function(x) {
 
   metadata <- get_name_type(metadata) %>%
     select(
-      .data$viaf_id, .data$source_ids,
-      .data$name_type, .data$text
+      "viaf_id",
+      "source_ids",
+      "name_type",
+      "text"
     )
 
   return(metadata)

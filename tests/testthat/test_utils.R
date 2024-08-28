@@ -10,6 +10,8 @@ test_that("invalid query", {
   expect_true(is.null(result))
 })
 
+skip(message = "Skipping")
+
 test_that("valid query", {
   result <- viaf_retrieve("102333412")
 

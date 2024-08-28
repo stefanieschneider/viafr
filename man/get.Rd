@@ -19,9 +19,10 @@ Get authority cluster data based on supplied VIAF identifier(s).
 }
 \note{
 An internet connection is required. The MARC 21 field
-definitions are used.
+definitions are used. This function does not currently work
+due to changes to the VIAF.
 }
 \examples{
-\donttest{viaf_get(c("64013650", "102333412"))}
+\dontrun{viaf_get(c("64013650", "102333412"))}
 
 }
