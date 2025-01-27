@@ -11,7 +11,7 @@ badge](http://www.r-pkg.org/badges/version/viafr)](https://cran.r-project.org/pa
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/stefanieschneider/viafr?branch=master&svg=true)](https://ci.appveyor.com/project/stefanieschneider/viafr)
 [![Coverage
-status](https://codecov.io/github/stefanieschneider/viafr/coverage.svg?branch=master)](https://codecov.io/github/stefanieschneider/viafr?branch=master)
+status](https://codecov.io/github/stefanieschneider/viafr/coverage.svg?branch=master)](https://app.codecov.io/github/stefanieschneider/viafr?branch=master)
 
 ## Overview
 
@@ -60,13 +60,13 @@ field definitions are used, see, e.g.,
 (result_search <- viaf_search("Menzel", maximumRecords = 5))
 #> $Menzel
 #> # A tibble: 5 × 4
-#>   viaf_id                source_ids       name_type text            
-#>   <chr>                  <list>           <chr>     <named list>    
-#> 1 9958151474888800490000 <tibble [1 × 3]> name      <tibble [2 × 8]>
-#> 2 9951148269716905230007 <tibble [1 × 3]> name      <tibble [2 × 8]>
-#> 3 9924169262252109510006 <tibble [1 × 3]> name      <tibble [2 × 5]>
-#> 4 9882160668064003560006 <tibble [1 × 3]> name      <tibble [1 × 3]>
-#> 5 9864149198241274940009 <tibble [2 × 3]> name      <tibble [1 × 3]>
+#>   viaf_id                source_ids       name_type                 text            
+#>   <chr>                  <list>           <chr>                     <named list>    
+#> 1 9958151474888800490000 <tibble [1 × 3]> Uniform Title Expressions <tibble [2 × 8]>
+#> 2 9951148269716905230007 <tibble [1 × 3]> Uniform Title Expressions <tibble [2 × 8]>
+#> 3 9924169262252109510006 <tibble [1 × 3]> Personal Names            <tibble [4 × 5]>
+#> 4 9882160668064003560006 <tibble [1 × 3]> Personal Names            <tibble [2 × 3]>
+#> 5 9864149198241274940009 <tibble [2 × 3]> Personal Names            <tibble [1 × 3]>
 
 # Retrieve a tibble of all source identifiers
 (source_ids <- dplyr::pull(result_search$`Menzel`, source_ids))
@@ -104,10 +104,10 @@ field definitions are used, see, e.g.,
 # Retrieve a tibble of data for the second search result
 (text <- dplyr::pull(result_search$`Menzel`, text) %>% purrr::pluck(2))
 #> # A tibble: 2 × 8
-#>      id count a     f     l     s     t     `0`  
-#>   <int> <int> <chr> <chr> <chr> <chr> <chr> <chr>
-#> 1     1     1 text  text  text  text  text  text 
-#> 2     1     1 text  text  <NA>  text  text  <NA>
+#>      id count a                    f     l      s                t                             `0`  
+#>   <int> <int> <chr>                <chr> <chr>  <chr>            <chr>                         <chr>
+#> 1     1     1 Müller-Brockmann, J. 1961  German "Menzel-Flocon " GRAPHIC ARTIST AND HIS DESIG… (via…
+#> 2     1     1 Müller-Brockmann, J. 1961  <NA>   "Menzel-Flocon " Gestaltungsprobleme des Graf… <NA>
 ```
 
 ### Suggest VIAF records
@@ -116,18 +116,18 @@ field definitions are used, see, e.g.,
 (result_suggest <- viaf_suggest("austen"))
 #> $austen
 #> # A tibble: 10 × 5
-#>    viaf_id               source_ids        name_type text                                  score
-#>    <chr>                 <list>            <chr>     <chr>                                 <chr>
-#>  1 102333412             <tibble [12 × 3]> name      Austen, Jane, 1775-1817               20942
-#>  2 9943394               <tibble [9 × 3]>  name      Austen Henry Layard, 1817-1894        6083 
-#>  3 66482160              <tibble [8 × 3]>  name      Austen Chamberlain, 1863-1937         4550 
-#>  4 49253679              <tibble [10 × 3]> name      Austen, J. L., 1911-1960              3916 
-#>  5 351144783162295221357 <tibble [5 × 3]>  name      Austen Ivereigh                       3303 
-#>  6 76472664              <tibble [6 × 3]>  name      Austen-Leigh, James Edward, 1798-1874 2906 
-#>  7 22268931              <tibble [4 × 3]>  name      Austen, Ralph A., 1937-               2600 
-#>  8 69175936              <tibble [7 × 3]>  name      Austen, John                          2302 
-#>  9 3256795               <tibble [4 × 3]>  name      Austen, Ernest Edward, 1867-1938      2298 
-#> 10 64067073              <tibble [6 × 3]>  name      Austen, K. Frank                      2234
+#>    viaf_id               source_ids        name_type      text                                 score
+#>    <chr>                 <list>            <chr>          <chr>                                <chr>
+#>  1 102333412             <tibble [12 × 3]> Personal Names Austen, Jane, 1775-1817              20942
+#>  2 9943394               <tibble [9 × 3]>  Personal Names Austen Henry Layard, 1817-1894       6083 
+#>  3 66482160              <tibble [8 × 3]>  Personal Names Austen Chamberlain, 1863-1937        4550 
+#>  4 49253679              <tibble [10 × 3]> Personal Names Austen, J. L., 1911-1960             3916 
+#>  5 351144783162295221357 <tibble [5 × 3]>  Personal Names Austen Ivereigh                      3303 
+#>  6 76472664              <tibble [6 × 3]>  Personal Names Austen-Leigh, James Edward, 1798-18… 2906 
+#>  7 22268931              <tibble [4 × 3]>  Personal Names Austen, Ralph A., 1937-              2600 
+#>  8 69175936              <tibble [7 × 3]>  Personal Names Austen, John                         2302 
+#>  9 3256795               <tibble [4 × 3]>  Personal Names Austen, Ernest Edward, 1867-1938     2298 
+#> 10 64067073              <tibble [6 × 3]>  Personal Names Austen, K. Frank                     2234
 
 # Retrieve source identifiers for the most relevant search result
 dplyr::filter(result_suggest$`austen`, score > 10000) %>%

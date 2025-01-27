@@ -1,6 +1,6 @@
 Package: viafr
 Title: Interface to the 'VIAF' ('Virtual International Authority File') API
-Version: 0.3.1
+Version: 0.3.2
 Authors@R: person('Stefanie', 'Schneider', email = 'stefanie.schneider@itg.uni-muenchen.de', role = c('cre', 'aut'), comment = c(ORCID = "0000-0003-4915-6949"))
 Maintainer: Stefanie Schneider <stefanie.schneider@itg.uni-muenchen.de>
 Description: Provides direct access to linked names for the same entity across the world's major name authority files, including national and regional variations in language, character set, and spelling. For more information go to <https://viaf.org/>.

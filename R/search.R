@@ -48,16 +48,17 @@ viaf_search <- function(query = NULL, ...) {
 #' @importFrom purrr map_chr
 #' @importFrom rlang .data
 get_search <- function(x) {
-  if (!is.null(x)) {
-    response <- x$searchRetrieveResponse
-    n_records <- response$numberOfRecords
+  response <- x$searchRetrieveResponse
+
+  n_records <- if (!is.null(response$numberOfRecords)) {
+    as.integer(response$numberOfRecords)
   } else {
-    n_records <- 0 # acts as a surrogate
+    0
   }
 
-  if (as.integer(n_records) == 0) {
+  if (n_records == 0) {
     return(
-      tibble(
+      tibble::tibble(
         viaf_id = NA,
         source_ids = list(),
         name_type = NA,
@@ -80,7 +81,7 @@ get_search <- function(x) {
     ) %>%
     mutate(
       source_ids = map(!!source_ids, get_source_ids),
-      text = map(split(x, 1:nrow(x)), get_text)
+      text = map(split(x, seq_len(nrow(x)), get_text))
     )
 
   metadata <- get_name_type(metadata) %>%

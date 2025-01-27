@@ -38,6 +38,9 @@ viaf_retrieve <- function(endpoint = NULL, ...) {
       `User-Agent` = viaf_ua(),
       `X-USER-AGENT` = viaf_ua(),
       Accept = "application/json"
+    ),
+    opts = list(
+      timeout = 30
     )
   )
 

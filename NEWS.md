@@ -1,3 +1,8 @@
+# viafr 0.3.2
+
+* Change error handling for server errors
+
+
 # viafr 0.3.1
 
 * Split given name and family name in DESCRIPTION

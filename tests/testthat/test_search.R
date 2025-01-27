@@ -33,8 +33,11 @@ test_that("empty query", {
 })
 
 test_that("valid query", {
-  result <- viaf_search("Duerer", maximumRecords = 5)
-  result <- result$`Duerer`
+  result <- viaf_search("Duerer", maximumRecords = 5)$`Duerer`
+
+  if (nrow(result) == 0) {
+    skip("Test skipped due to server error.")
+  }
 
   tbl_class <- c("tbl_df", "tbl", "data.frame")
 
